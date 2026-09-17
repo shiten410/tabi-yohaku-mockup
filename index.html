@@ -24,6 +24,10 @@
     --accent-tint:#FCE4D7;
     --line:#DEE5E7;
     --danger:#B4483A;
+    --tag-curious:#4C63C7;
+    --tag-curious-tint:#E5E9FA;
+    --tag-visited:#96690A;
+    --tag-visited-tint:#F4E9D2;
     --shadow: 0 1px 2px rgba(16,32,38,.06), 0 8px 24px -12px rgba(16,32,38,.18);
   }
   @media (prefers-color-scheme: dark){
@@ -42,6 +46,10 @@
       --accent-tint:#3A2419;
       --line:#25383D;
       --danger:#FF8271;
+      --tag-curious:#8CA6F2;
+      --tag-curious-tint:#202C4C;
+      --tag-visited:#E0B255;
+      --tag-visited-tint:#3A2E12;
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
     }
   }
@@ -60,6 +68,10 @@
     --accent-tint:#3A2419;
     --line:#25383D;
     --danger:#FF8271;
+    --tag-curious:#8CA6F2;
+    --tag-curious-tint:#202C4C;
+    --tag-visited:#E0B255;
+    --tag-visited-tint:#3A2E12;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
   }
 
@@ -166,10 +178,38 @@
     display:inline-flex; align-items:center; gap:4px; font-size:10.5px; font-weight:700;
     padding:3px 8px; border-radius:999px; white-space:nowrap; flex:none;
   }
+  .chip.curious{ background:var(--tag-curious-tint); color:var(--tag-curious); }
   .chip.candidate{ background:var(--surface-2); color:var(--muted); border:1px solid var(--line); }
   .chip.planned{ background:var(--primary-tint); color:var(--primary-ink); }
-  .chip.visited{ background:var(--surface-2); color:var(--faint); }
+  .chip.visited{ background:var(--tag-visited-tint); color:var(--tag-visited); }
   .chip.dropped{ background:var(--surface-2); color:var(--faint); text-decoration:line-through; }
+
+  /* ---------- tag filter ---------- */
+  .tag-filter{ display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; margin-bottom:16px; }
+  .tag-filter-pill{
+    flex:none; display:inline-flex; align-items:center; gap:6px; padding:8px 13px; border-radius:999px;
+    border:1.5px solid var(--line); background:var(--surface); font-size:12px; font-weight:700; color:var(--muted);
+    cursor:pointer;
+  }
+  .tag-filter-pill .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+  .tag-filter-pill.active{ color:#fff; border-color:transparent; }
+  .tag-filter-pill[data-tag="all"].active{ background:var(--ink); }
+  .tag-filter-pill[data-tag="curious"].active{ background:var(--tag-curious); }
+  .tag-filter-pill[data-tag="candidate"].active{ background:var(--muted); }
+  .tag-filter-pill[data-tag="planned"].active{ background:var(--primary); }
+  .tag-filter-pill[data-tag="visited"].active{ background:var(--tag-visited); }
+  .tag-filter-pill[data-tag="dropped"].active{ background:var(--faint); }
+  .tag-filter-pill:not(.active) .dot.curious{ background:var(--tag-curious); }
+  .tag-filter-pill:not(.active) .dot.candidate{ background:var(--muted); }
+  .tag-filter-pill:not(.active) .dot.planned{ background:var(--primary); }
+  .tag-filter-pill:not(.active) .dot.visited{ background:var(--tag-visited); }
+  .tag-filter-pill:not(.active) .dot.dropped{ background:var(--faint); }
+
+  .place-card.tag-curious{ border-left:4px solid var(--tag-curious); }
+  .place-card.tag-candidate{ border-left:4px solid var(--faint); }
+  .place-card.tag-planned{ border-left:4px solid var(--primary); }
+  .place-card.tag-visited{ border-left:4px solid var(--tag-visited); }
+  .place-card.tag-dropped{ border-left:4px solid var(--line); opacity:.65; }
 
   /* ---------- place cards ---------- */
   .place-card{
@@ -207,6 +247,9 @@
     display:flex; align-items:center; gap:5px;
   }
   :root[data-theme="dark"] .map-badge, @media (prefers-color-scheme:dark){ .map-badge{ background:rgba(22,37,42,.85); color:var(--muted);} }
+  .map-legend{ display:flex; flex-wrap:wrap; gap:12px; margin:10px 0 16px; }
+  .map-legend span{ display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--muted); font-weight:600; }
+  .map-legend i{ width:9px; height:9px; border-radius:50%; display:inline-block; flex:none; }
 
   /* ---------- lodging / flight cards ---------- */
   .info-card{
@@ -539,14 +582,22 @@
           <rect x="200" y="95" width="80" height="34" rx="4" fill="#BFD8D3"/>
           <rect x="310" y="45" width="70" height="36" rx="4" fill="#BFD8D3"/>
           <circle cx="115" cy="65" r="7" fill="#0E6E63"/>
-          <circle cx="240" cy="112" r="7" fill="#F2703E"/>
-          <circle cx="340" cy="63" r="7" fill="#0E6E63"/>
+          <circle cx="240" cy="112" r="7" fill="#4C63C7"/>
+          <circle cx="340" cy="63" r="7" fill="#96690A"/>
           <circle cx="185" cy="150" r="7" fill="#93A3AB"/>
+          <circle cx="95" cy="140" r="6" fill="#fff" stroke="#B9C4C0" stroke-width="2"/>
         </svg>
         <div class="map-badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg>
-          候補地 4件・地図表示(サンプル)
+          候補地 5件・地図表示(サンプル)
         </div>
+      </div>
+      <div class="map-legend">
+        <span><i style="background:#0E6E63"></i>行く予定</span>
+        <span><i style="background:#4C63C7"></i>気になる</span>
+        <span><i style="background:#93A3AB"></i>候補</span>
+        <span><i style="background:#96690A"></i>訪問済み</span>
+        <span><i style="background:#fff;border:2px solid #B9C4C0"></i>今回はなし</span>
       </div>
 
       <button class="ai-btn" id="nearbyAiBtn" onclick="runAi(this,'nearbyAiResult')">
@@ -575,7 +626,16 @@
 
       <div class="section-label">行きたい場所</div>
 
-      <div class="place-card">
+      <div class="tag-filter" id="tagFilter">
+        <div class="tag-filter-pill active" data-tag="all">すべて 5</div>
+        <div class="tag-filter-pill" data-tag="curious"><span class="dot curious"></span>気になる 1</div>
+        <div class="tag-filter-pill" data-tag="candidate"><span class="dot candidate"></span>候補 1</div>
+        <div class="tag-filter-pill" data-tag="planned"><span class="dot planned"></span>行く予定 1</div>
+        <div class="tag-filter-pill" data-tag="visited"><span class="dot visited"></span>訪問済み 1</div>
+        <div class="tag-filter-pill" data-tag="dropped"><span class="dot dropped"></span>今回はなし 1</div>
+      </div>
+
+      <div class="place-card tag-planned" data-tag="planned">
         <div class="place-head">
           <div><div class="place-name">台北101 展望台</div><div class="place-cat">絶景・夜景</div></div>
           <span class="chip planned">行く予定</span>
@@ -605,10 +665,10 @@
         </div>
       </div>
 
-      <div class="place-card">
+      <div class="place-card tag-curious" data-tag="curious">
         <div class="place-head">
           <div><div class="place-name">阿妹茶樓</div><div class="place-cat">グルメ・カフェ</div></div>
-          <span class="chip candidate">候補</span>
+          <span class="chip curious">気になる</span>
         </div>
         <div class="place-memo">千と千尋のモデルと噂のお店。九份観光の後に寄れそう(さきメモ)。</div>
         <div class="place-foot">
@@ -617,7 +677,19 @@
         </div>
       </div>
 
-      <div class="place-card">
+      <div class="place-card tag-candidate" data-tag="candidate">
+        <div class="place-head">
+          <div><div class="place-name">迪化街</div><div class="place-cat">買い物・問屋街</div></div>
+          <span class="chip candidate">候補</span>
+        </div>
+        <div class="place-memo">乾物・お茶の問屋街。お土産探しに良さそうだけど時間があれば(たかしメモ)。</div>
+        <div class="place-foot">
+          <a class="link-pill" href="#" onclick="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg>travel.taipei</a>
+          <button class="gmaps-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg>開く</button>
+        </div>
+      </div>
+
+      <div class="place-card tag-visited" data-tag="visited">
         <div class="place-head">
           <div><div class="place-name">故宮博物院</div><div class="place-cat">観光・美術館</div></div>
           <span class="chip visited">訪問済み</span>
@@ -629,10 +701,10 @@
         </div>
       </div>
 
-      <div class="place-card" style="opacity:.6">
+      <div class="place-card tag-dropped" data-tag="dropped">
         <div class="place-head">
           <div><div class="place-name">象山夜景</div><div class="place-cat">絶景</div></div>
-          <span class="chip dropped">見送り</span>
+          <span class="chip dropped">今回はなし</span>
         </div>
         <div class="place-memo">階段がきつそうなので今回は見送り。次回候補。</div>
       </div>
@@ -932,6 +1004,18 @@
     pill.classList.add('active');
     document.querySelectorAll('.day-body').forEach(d=>d.style.display='none');
     document.querySelector(`.day-body[data-day-body="${pill.dataset.day}"]`).style.display='block';
+  });
+
+  // 場所:タグフィルタ
+  document.getElementById('tagFilter').addEventListener('click', (e)=>{
+    const pill = e.target.closest('.tag-filter-pill');
+    if(!pill) return;
+    document.querySelectorAll('.tag-filter-pill').forEach(p=>p.classList.remove('active'));
+    pill.classList.add('active');
+    const tag = pill.dataset.tag;
+    document.querySelectorAll('.place-card[data-tag]').forEach(card=>{
+      card.style.display = (tag==='all' || card.dataset.tag===tag) ? 'block' : 'none';
+    });
   });
 
   // 旅程:日別 ⇄ 通し表示(全日程をまとめてスクロール)
