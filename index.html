@@ -134,6 +134,13 @@
   .day-pill.today::after{ content:"TODAY"; display:block; font-size:8px; letter-spacing:.08em; margin-top:1px; color:var(--accent); font-weight:800; }
   .day-pill.active.today::after{ color:#FFE3D4; }
 
+  .day-header{
+    display:flex; align-items:center; gap:8px; font-family:"Fraunces",serif; font-weight:600;
+    font-size:15px; margin:26px 0 4px; color:var(--ink);
+  }
+  .day-body:first-of-type .day-header{ margin-top:6px; }
+  .day-header-today{ font-size:9px; font-weight:800; letter-spacing:.06em; color:var(--accent); border:1px solid var(--accent); padding:2px 6px; border-radius:999px; }
+
   /* ---------- timeline ---------- */
   .timeline{ position:relative; margin-top:16px; padding-left:26px; }
   .timeline::before{ content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:var(--line); }
@@ -281,6 +288,14 @@
     padding:12px; font-size:13.5px; font-weight:800; font-family:inherit; cursor:pointer; margin-bottom:16px;
   }
   .ai-btn svg{ width:15px; height:15px; }
+  .ai-btn:disabled{ opacity:.75; cursor:default; }
+  .ai-inline-btn{
+    display:inline-flex; align-items:center; gap:6px; background:none; border:none; padding:9px 0 2px;
+    color:#7B57D9; font-size:12px; font-weight:800; font-family:inherit; cursor:pointer;
+  }
+  :root[data-theme="dark"] .ai-inline-btn, @media (prefers-color-scheme:dark){ .ai-inline-btn{ color:#C6B6FF; } }
+  .ai-inline-btn svg{ width:13px; height:13px; }
+  .ai-inline-btn:disabled{ opacity:.6; cursor:default; }
   .ai-note{
     border:1px solid #E3DBFB; background:#F7F4FE; border-radius:13px; padding:11px 12px; margin-top:10px;
     display:flex; gap:9px; align-items:flex-start;
@@ -289,6 +304,19 @@
   .ai-note p{ font-size:12px; line-height:1.6; color:var(--ink); margin:5px 0 0; opacity:.9; }
   .ai-note .ai-note-head{ display:flex; align-items:center; gap:6px; }
   .ai-disclaimer{ font-size:10px; color:var(--faint); margin-top:6px; }
+  .ai-footer{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:10px;
+    padding-top:10px; border-top:1px solid #E3DBFB;
+  }
+  :root[data-theme="dark"] .ai-footer, @media (prefers-color-scheme:dark){ .ai-footer{ border-color:#3B3160; } }
+  .ai-meta{ font-size:10px; color:var(--faint); }
+  .ai-regen-btn{
+    display:inline-flex; align-items:center; gap:5px; background:none; border:none; padding:0;
+    color:#7B57D9; font-size:11px; font-weight:800; font-family:inherit; cursor:pointer; flex:none;
+  }
+  :root[data-theme="dark"] .ai-regen-btn, @media (prefers-color-scheme:dark){ .ai-regen-btn{ color:#C6B6FF; } }
+  .ai-regen-btn svg{ width:12px; height:12px; }
+  .ai-regen-btn:disabled{ opacity:.5; cursor:default; }
   .nearby-item{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); }
   .nearby-item:last-child{ border-bottom:none; }
   .nearby-dist{ font-size:11px; font-weight:800; color:var(--primary); background:var(--primary-tint); padding:4px 8px; border-radius:8px; flex:none; font-variant-numeric:tabular-nums; }
@@ -377,6 +405,8 @@
   }
   .remember-row{ display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); margin-top:12px; }
   .close-x{ position:absolute; top:14px; right:16px; background:none; border:none; color:var(--faint); font-size:20px; cursor:pointer; }
+
+  [hidden]{ display:none !important; }
 </style>
 </head>
 <body>
@@ -411,6 +441,11 @@
 
     <!-- ============ 1. 旅程 ============ -->
     <section class="panel active" id="panel-itinerary">
+      <div class="seg" id="itinViewSeg">
+        <button class="active" data-view="byday">日別</button>
+        <button data-view="all">通し表示</button>
+      </div>
+
       <div class="day-pills" id="dayPills">
         <div class="day-pill active" data-day="1">Day1<small>11/12</small></div>
         <div class="day-pill today" data-day="2">Day2<small>11/13</small></div>
@@ -419,6 +454,7 @@
       </div>
 
       <div class="day-body" data-day-body="1">
+        <div class="day-header" hidden>Day1・11/12(木)</div>
         <div class="timeline">
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><path d="M2 16l20-7-9 15-2-8-9-1z" fill="currentColor" stroke="none"/></svg></div>
@@ -439,6 +475,7 @@
       </div>
 
       <div class="day-body" data-day-body="2" style="display:none">
+        <div class="day-header" hidden>Day2・11/13(金)<span class="day-header-today">TODAY</span></div>
         <div class="timeline">
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg></div>
@@ -459,6 +496,7 @@
       </div>
 
       <div class="day-body" data-day-body="3" style="display:none">
+        <div class="day-header" hidden>Day3・11/14(土)</div>
         <div class="timeline">
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg></div>
@@ -474,6 +512,7 @@
       </div>
 
       <div class="day-body" data-day-body="4" style="display:none">
+        <div class="day-header" hidden>Day4・11/15(日)</div>
         <div class="timeline">
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><path d="M4 10l8-6 8 6v10H4z"/></svg></div>
@@ -510,7 +549,11 @@
         </div>
       </div>
 
-      <div class="place-card" style="margin-bottom:16px">
+      <button class="ai-btn" id="nearbyAiBtn" onclick="runAi(this,'nearbyAiResult')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>
+        AIで近くの候補地を提案
+      </button>
+      <div class="place-card" style="margin-bottom:16px" id="nearbyAiResult" hidden>
         <div class="ai-note-head"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span><span style="font-size:12.5px;font-weight:700">現在地から近い候補</span></div>
         <div class="nearby-item">
           <div class="nearby-dist">320m</div>
@@ -521,6 +564,13 @@
           <div class="nearby-body"><div class="nearby-name">故宮博物院</div><div class="nearby-comment">徒歩だとやや距離あり。バスの利用がおすすめです。</div></div>
         </div>
         <div class="ai-disclaimer">保存済みの候補地を現在地からの距離で並べ替えたものです(新規の場所は提案しません)</div>
+        <div class="ai-footer">
+          <span class="ai-meta" id="nearbyAiMeta">たかしが生成・11/13 09:04(たかしの現在地基準)</span>
+          <button class="ai-regen-btn" onclick="regenAi(this,'nearbyAiMeta','たかし')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4v5h5M20 20v-5h-5"/><path d="M5.5 15A7 7 0 0 0 19 12M18.5 9A7 7 0 0 0 5 12"/></svg>
+            自分の現在地で再生成
+          </button>
+        </div>
       </div>
 
       <div class="section-label">行きたい場所</div>
@@ -531,11 +581,22 @@
           <span class="chip planned">行く予定</span>
         </div>
         <div class="place-memo">夜景が綺麗らしい。チケットは並ばないよう事前購入がおすすめとの情報あり。</div>
-        <div class="ai-note">
+        <button class="ai-inline-btn" id="triviaAiBtn" onclick="runAi(this,'triviaAiResult')">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>
+          AIで豆知識を生成
+        </button>
+        <div class="ai-note" id="triviaAiResult" hidden>
           <span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>豆知識</span>
           <div>
-            <p>508mは2004〜2010年まで世界一高い建築物でした。地震国ならではの巨大な制振ダンパー「ウインドダンパー」が87〜92階に展示されています。</p>
+            <p id="triviaAiText">508mは2004〜2010年まで世界一高い建築物でした。地震国ならではの巨大な制振ダンパー「ウインドダンパー」が87〜92階に展示されています。</p>
             <div class="ai-disclaimer">AIが生成した参考情報です。事実と異なる場合があります</div>
+            <div class="ai-footer">
+              <span class="ai-meta" id="triviaAiMeta">みほが生成・11/10 21:47・全員に表示中</span>
+              <button class="ai-regen-btn" onclick="regenAi(this,'triviaAiMeta','たかし')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4v5h5M20 20v-5h-5"/><path d="M5.5 15A7 7 0 0 0 19 12M18.5 9A7 7 0 0 0 5 12"/></svg>
+                再生成
+              </button>
+            </div>
           </div>
         </div>
         <div class="place-foot">
@@ -628,7 +689,7 @@
     <section class="panel" id="panel-packing">
       <button class="ai-btn" onclick="document.getElementById('packAiModal').classList.add('open')">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>
-        AIで持ち物のたたき台を作る
+        AIで持ち物リストの候補を作成
       </button>
       <div class="seg" id="packSeg">
         <button class="active" data-pack="common">共通</button>
@@ -654,7 +715,7 @@
     <section class="panel" id="panel-todo">
       <button class="ai-btn" onclick="document.getElementById('todoAiModal').classList.add('open')">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>
-        AIでやることのたたき台を作る
+        AIでやることリストの候補を作成
       </button>
       <div class="todo-toolbar">
         <div class="section-label" style="margin:0">やることリスト</div>
@@ -769,7 +830,7 @@
   <div class="modal-veil" id="packAiModal">
     <div class="modal-sheet" style="position:relative">
       <button class="close-x" onclick="document.getElementById('packAiModal').classList.remove('open')">×</button>
-      <h3 style="display:flex;align-items:center;gap:8px"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span>持ち物のたたき台</h3>
+      <h3 style="display:flex;align-items:center;gap:8px"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span>持ち物リストの候補</h3>
       <p class="hint">行き先(台北・11月・4日間)から提案しました。すでにリストにある項目は除外しています。追加したいものだけ選んでください。</p>
       <div id="packSuggestList">
         <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">折りたたみ傘</div></div>
@@ -788,7 +849,7 @@
   <div class="modal-veil" id="todoAiModal">
     <div class="modal-sheet" style="position:relative">
       <button class="close-x" onclick="document.getElementById('todoAiModal').classList.remove('open')">×</button>
-      <h3 style="display:flex;align-items:center;gap:8px"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span>やることのたたき台</h3>
+      <h3 style="display:flex;align-items:center;gap:8px"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span>やることリストの候補</h3>
       <p class="hint">海外旅行・4日間の行程から提案しました。すでにリストにあるタスクは除外しています。担当者は追加後にあとから決められます。</p>
       <div id="todoSuggestList">
         <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">パスポートの残存期間を確認</div></div>
@@ -827,6 +888,31 @@
 <script>
   const checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M4 12l5 5 11-11"/></svg>';
 
+  // AI features only run when their button is tapped (no auto-run on load)
+  function runAi(btn, resultId){
+    if(btn.disabled) return;
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = original.replace(/AIで.+/, '生成中…');
+    setTimeout(()=>{
+      document.getElementById(resultId).hidden = false;
+      btn.style.display = 'none';
+    }, 550);
+  }
+
+  // 再生成:保存済みのAI文言を作り直す(誰が・いつ生成したかを更新)
+  function regenAi(btn, metaId, who){
+    if(btn.disabled) return;
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '再生成中…';
+    setTimeout(()=>{
+      document.getElementById(metaId).textContent = `${who}が生成・たった今・全員に表示中`;
+      btn.disabled = false;
+      btn.innerHTML = original;
+    }, 700);
+  }
+
   // bottom nav switching
   document.getElementById('bottomNav').addEventListener('click', (e)=>{
     const btn = e.target.closest('button[data-target]');
@@ -838,7 +924,7 @@
     document.querySelector('main').scrollTo(0,0);
   });
 
-  // day pill switching
+  // day pill switching (only meaningful in 日別 view)
   document.getElementById('dayPills').addEventListener('click', (e)=>{
     const pill = e.target.closest('.day-pill');
     if(!pill) return;
@@ -846,6 +932,25 @@
     pill.classList.add('active');
     document.querySelectorAll('.day-body').forEach(d=>d.style.display='none');
     document.querySelector(`.day-body[data-day-body="${pill.dataset.day}"]`).style.display='block';
+  });
+
+  // 旅程:日別 ⇄ 通し表示(全日程をまとめてスクロール)
+  document.getElementById('itinViewSeg').addEventListener('click', (e)=>{
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    document.querySelectorAll('#itinViewSeg button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const allMode = btn.dataset.view === 'all';
+    document.getElementById('dayPills').style.display = allMode ? 'none' : 'flex';
+    document.querySelectorAll('.day-header').forEach(h=> h.hidden = !allMode);
+    if(allMode){
+      document.querySelectorAll('.day-body').forEach(d=> d.style.display='block');
+    } else {
+      const activeDay = document.querySelector('.day-pill.active').dataset.day;
+      document.querySelectorAll('.day-body').forEach(d=>{
+        d.style.display = (d.dataset.dayBody === activeDay) ? 'block' : 'none';
+      });
+    }
   });
 
   // packing segment switch
