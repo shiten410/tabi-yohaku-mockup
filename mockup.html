@@ -1,4 +1,9 @@
-<title>旅の余白</title>
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>旅とも</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -62,26 +67,19 @@
   html,body{height:100%;}
   body{
     margin:0;
-    background:var(--backdrop);
+    background:var(--bg);
     font-family:"Manrope",-apple-system,"Hiragino Sans",sans-serif;
     color:var(--ink);
-    display:flex;
-    justify-content:center;
   }
   .stage{
     width:100%;
-    max-width:460px;
-    min-height:100%;
+    height:100%;
     background:var(--bg);
     display:flex;
     flex-direction:column;
     position:relative;
-    box-shadow:var(--shadow);
   }
-  @media (min-width:520px){
-    body{ padding-block:28px; }
-    .stage{ min-height:min(880px,calc(100dvh - 56px)); border-radius:28px; overflow:hidden; }
-  }
+  .topbar-inner, main .inner, nav.bottom .inner{ width:100%; max-width:640px; margin:0 auto; }
 
   h1,h2,h3{ font-family:"Fraunces",Georgia,serif; margin:0; text-wrap:balance; }
 
@@ -92,6 +90,7 @@
     padding:14px 18px 12px;
     border-bottom:1px solid var(--line);
   }
+  .brand-mark{ font-size:10px; font-weight:800; letter-spacing:.12em; color:var(--primary); margin-bottom:6px; }
   .topbar-row{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
   .trip-name{ font-size:20px; font-weight:600; color:var(--ink); }
   .trip-dates{ margin-top:3px; font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
@@ -270,6 +269,55 @@
   .assignee.unassigned{ background:var(--accent-tint); color:var(--accent); }
   .due{ font-size:11px; color:var(--faint); font-weight:600; }
 
+  /* ---------- AI features ---------- */
+  .ai-tag{
+    display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:800; letter-spacing:.03em;
+    color:#fff; background:linear-gradient(120deg,#7B6EF2,#B15FE0); padding:2px 7px 2px 6px; border-radius:999px; flex:none;
+  }
+  .ai-tag svg{ width:9px; height:9px; }
+  .ai-btn{
+    display:inline-flex; align-items:center; gap:7px; width:100%; justify-content:center;
+    background:linear-gradient(120deg,#7B6EF2,#B15FE0); color:#fff; border:none; border-radius:12px;
+    padding:12px; font-size:13.5px; font-weight:800; font-family:inherit; cursor:pointer; margin-bottom:16px;
+  }
+  .ai-btn svg{ width:15px; height:15px; }
+  .ai-note{
+    border:1px solid #E3DBFB; background:#F7F4FE; border-radius:13px; padding:11px 12px; margin-top:10px;
+    display:flex; gap:9px; align-items:flex-start;
+  }
+  :root[data-theme="dark"] .ai-note, @media (prefers-color-scheme:dark){ .ai-note{ background:#241E38; border-color:#3B3160; } }
+  .ai-note p{ font-size:12px; line-height:1.6; color:var(--ink); margin:5px 0 0; opacity:.9; }
+  .ai-note .ai-note-head{ display:flex; align-items:center; gap:6px; }
+  .ai-disclaimer{ font-size:10px; color:var(--faint); margin-top:6px; }
+  .nearby-item{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); }
+  .nearby-item:last-child{ border-bottom:none; }
+  .nearby-dist{ font-size:11px; font-weight:800; color:var(--primary); background:var(--primary-tint); padding:4px 8px; border-radius:8px; flex:none; font-variant-numeric:tabular-nums; }
+  .nearby-body{ flex:1; min-width:0; }
+  .nearby-name{ font-size:13px; font-weight:700; }
+  .nearby-comment{ font-size:11.5px; color:var(--muted); margin-top:1px; }
+  .scan-btn{
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    border:1.5px dashed #C9BBF5; background:#F7F4FE; color:#6B4FD8; border-radius:12px;
+    padding:11px; font-size:12.5px; font-weight:800; font-family:inherit; cursor:pointer; margin-top:12px;
+  }
+  :root[data-theme="dark"] .scan-btn, @media (prefers-color-scheme:dark){ .scan-btn{ background:#241E38; border-color:#4A3E77; color:#C6B6FF; } }
+  .scan-btn svg{ width:15px; height:15px; }
+  .autofill-mark{ display:inline-flex; align-items:center; gap:3px; font-size:9px; font-weight:800; color:#6B4FD8; margin-top:3px; }
+  :root[data-theme="dark"] .autofill-mark, @media (prefers-color-scheme:dark){ .autofill-mark{ color:#C6B6FF; } }
+
+  .suggest-row .check-box.done{ background:var(--primary); border-color:var(--primary); }
+  .suggest-row .check-box svg{ width:12px; height:12px; stroke:#fff; }
+  .suggest-row{ display:flex; align-items:center; gap:11px; padding:10px 2px; border-bottom:1px solid var(--line); }
+  .suggest-row:last-child{ border-bottom:none; }
+  .suggest-label{ flex:1; font-size:13.5px; font-weight:600; }
+  .suggest-dupe{ font-size:10px; color:var(--faint); }
+  .sheet-actions{ display:flex; gap:10px; margin-top:16px; }
+  .sheet-actions .ghost-btn{
+    flex:1; background:var(--surface-2); color:var(--ink); border:1px solid var(--line); border-radius:12px;
+    padding:12px; font-size:13.5px; font-weight:800; font-family:inherit; cursor:pointer;
+  }
+  .sheet-actions .primary-btn{ flex:1; margin-top:0; }
+
   /* ---------- members ---------- */
   .member-row{
     display:flex; align-items:center; gap:12px; padding:12px 2px; border-bottom:1px solid var(--line);
@@ -292,9 +340,10 @@
   /* ---------- bottom nav ---------- */
   nav.bottom{
     position:sticky; bottom:0; z-index:20;
-    display:flex; background:var(--surface); border-top:1px solid var(--line);
+    background:var(--surface); border-top:1px solid var(--line);
     padding:8px 6px calc(8px + env(safe-area-inset-bottom,0px));
   }
+  nav.bottom .inner{ display:flex; }
   nav.bottom button{
     flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
     background:none; border:none; color:var(--faint); font-family:inherit; font-size:10px; font-weight:700;
@@ -329,11 +378,15 @@
   .remember-row{ display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); margin-top:12px; }
   .close-x{ position:absolute; top:14px; right:16px; background:none; border:none; color:var(--faint); font-size:20px; cursor:pointer; }
 </style>
+</head>
+<body>
 
 <div class="stage">
 
   <!-- ============ HEADER ============ -->
   <header class="topbar">
+    <div class="topbar-inner">
+    <div class="brand-mark">旅とも</div>
     <div class="topbar-row">
       <div>
         <h1 class="trip-name">台北・九份 4日間</h1>
@@ -350,9 +403,11 @@
         </button>
       </div>
     </div>
+    </div>
   </header>
 
   <main>
+    <div class="inner">
 
     <!-- ============ 1. 旅程 ============ -->
     <section class="panel active" id="panel-itinerary">
@@ -455,6 +510,19 @@
         </div>
       </div>
 
+      <div class="place-card" style="margin-bottom:16px">
+        <div class="ai-note-head"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span><span style="font-size:12.5px;font-weight:700">現在地から近い候補</span></div>
+        <div class="nearby-item">
+          <div class="nearby-dist">320m</div>
+          <div class="nearby-body"><div class="nearby-name">阿妹茶樓</div><div class="nearby-comment">徒歩5分弱。九份観光の後の休憩にちょうど良さそうです。</div></div>
+        </div>
+        <div class="nearby-item">
+          <div class="nearby-dist">1.1km</div>
+          <div class="nearby-body"><div class="nearby-name">故宮博物院</div><div class="nearby-comment">徒歩だとやや距離あり。バスの利用がおすすめです。</div></div>
+        </div>
+        <div class="ai-disclaimer">保存済みの候補地を現在地からの距離で並べ替えたものです(新規の場所は提案しません)</div>
+      </div>
+
       <div class="section-label">行きたい場所</div>
 
       <div class="place-card">
@@ -463,6 +531,13 @@
           <span class="chip planned">行く予定</span>
         </div>
         <div class="place-memo">夜景が綺麗らしい。チケットは並ばないよう事前購入がおすすめとの情報あり。</div>
+        <div class="ai-note">
+          <span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>豆知識</span>
+          <div>
+            <p>508mは2004〜2010年まで世界一高い建築物でした。地震国ならではの巨大な制振ダンパー「ウインドダンパー」が87〜92階に展示されています。</p>
+            <div class="ai-disclaimer">AIが生成した参考情報です。事実と異なる場合があります</div>
+          </div>
+        </div>
         <div class="place-foot">
           <a class="link-pill" href="#" onclick="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg>taipei-101.com.tw</a>
           <button class="gmaps-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg>開く</button>
@@ -516,7 +591,13 @@
           <div><div class="info-field-value">11:50</div><div class="info-field-label">TPE</div></div>
         </div>
         <div class="info-attach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5"/><path d="M6 3h8l5 5v13H6z"/></svg>eチケット控え.pdf を添付済み</div>
+        <div class="autofill-mark"><svg viewBox="0 0 24 24" fill="currentColor" style="width:10px;height:10px"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>この便名・時刻はAIがPDFから自動入力(保存前に確認済み)</div>
       </div>
+
+      <button class="scan-btn" onclick="document.getElementById('scanModal').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"/><path d="M8 12h8"/></svg>
+        予約確認書をAIで読み取る
+      </button>
       <div class="info-card">
         <div class="info-top">
           <div><div class="info-kind">復路 ・ JL804</div><div class="info-title">桃園 → 羽田</div></div>
@@ -545,6 +626,10 @@
 
     <!-- ============ 4. 持ち物 ============ -->
     <section class="panel" id="panel-packing">
+      <button class="ai-btn" onclick="document.getElementById('packAiModal').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>
+        AIで持ち物のたたき台を作る
+      </button>
       <div class="seg" id="packSeg">
         <button class="active" data-pack="common">共通</button>
         <button data-pack="mine">個人(たかし)</button>
@@ -567,6 +652,10 @@
 
     <!-- ============ 5. やることリスト ============ -->
     <section class="panel" id="panel-todo">
+      <button class="ai-btn" onclick="document.getElementById('todoAiModal').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>
+        AIでやることのたたき台を作る
+      </button>
       <div class="todo-toolbar">
         <div class="section-label" style="margin:0">やることリスト</div>
         <div class="toggle-pill" id="unassignedToggle"><span class="dotsw"></span>未定のみ</div>
@@ -620,7 +709,7 @@
         <div class="pin-display">
           <div class="pin-digit">4</div><div class="pin-digit">8</div><div class="pin-digit">1</div><div class="pin-digit">2</div>
         </div>
-        <div class="invite-link"><span>tabi-yohaku.app/t/taipei-4812</span><button>コピー</button></div>
+        <div class="invite-link"><span>tabitomo.app/t/taipei-4812</span><button>コピー</button></div>
       </div>
 
       <div class="section-label">参加者</div>
@@ -630,10 +719,12 @@
       <div class="member-row"><div class="member-av" style="background:#93A3AB">さ</div><div><div class="member-name">さき</div><div class="member-role">11/5 参加・端末未記憶</div></div></div>
     </section>
 
+    </div>
   </main>
 
   <!-- ============ BOTTOM NAV ============ -->
   <nav class="bottom" id="bottomNav">
+   <div class="inner">
     <button class="active" data-target="panel-itinerary">
       <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>
       旅程
@@ -658,6 +749,7 @@
       <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2.5 19c1-3.2 3.6-5 6.5-5s5.5 1.8 6.5 5"/><circle cx="17.5" cy="8.5" r="2.2"/><path d="M16 13.2c2 .3 3.6 1.7 4.3 3.8"/></svg>
       メンバー
     </button>
+   </div>
   </nav>
 
   <!-- ============ JOIN MODAL ============ -->
@@ -673,9 +765,68 @@
     </div>
   </div>
 
+  <!-- ============ PACKING AI MODAL ============ -->
+  <div class="modal-veil" id="packAiModal">
+    <div class="modal-sheet" style="position:relative">
+      <button class="close-x" onclick="document.getElementById('packAiModal').classList.remove('open')">×</button>
+      <h3 style="display:flex;align-items:center;gap:8px"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span>持ち物のたたき台</h3>
+      <p class="hint">行き先(台北・11月・4日間)から提案しました。すでにリストにある項目は除外しています。追加したいものだけ選んでください。</p>
+      <div id="packSuggestList">
+        <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">折りたたみ傘</div></div>
+        <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">酔い止め薬</div></div>
+        <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">羽織れる上着(朝晩冷える対策)</div></div>
+        <div class="suggest-row" style="opacity:.4"><div class="check-box" style="pointer-events:none"></div><div class="suggest-label">モバイルWi-Fiルーター<div class="suggest-dupe">すでにリストにあります</div></div></div>
+      </div>
+      <div class="sheet-actions">
+        <button class="ghost-btn" onclick="document.getElementById('packAiModal').classList.remove('open')">選んだ項目を追加</button>
+        <button class="primary-btn" onclick="document.getElementById('packAiModal').classList.remove('open')">すべて追加</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TODO AI MODAL ============ -->
+  <div class="modal-veil" id="todoAiModal">
+    <div class="modal-sheet" style="position:relative">
+      <button class="close-x" onclick="document.getElementById('todoAiModal').classList.remove('open')">×</button>
+      <h3 style="display:flex;align-items:center;gap:8px"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span>やることのたたき台</h3>
+      <p class="hint">海外旅行・4日間の行程から提案しました。すでにリストにあるタスクは除外しています。担当者は追加後にあとから決められます。</p>
+      <div id="todoSuggestList">
+        <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">パスポートの残存期間を確認</div></div>
+        <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">クレジットカードの海外利用設定を確認</div></div>
+        <div class="suggest-row"><div class="check-box" onclick="this.classList.toggle('done');this.innerHTML=this.classList.contains('done')?checkSvg:''"></div><div class="suggest-label">現地の緊急連絡先・大使館情報を共有</div></div>
+        <div class="suggest-row" style="opacity:.4"><div class="check-box" style="pointer-events:none"></div><div class="suggest-label">海外旅行保険に加入する<div class="suggest-dupe">すでにリストにあります</div></div></div>
+      </div>
+      <div class="sheet-actions">
+        <button class="ghost-btn" onclick="document.getElementById('todoAiModal').classList.remove('open')">選んだ項目を追加</button>
+        <button class="primary-btn" onclick="document.getElementById('todoAiModal').classList.remove('open')">すべて追加</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCAN (予約確認書AI読み取り) MODAL ============ -->
+  <div class="modal-veil" id="scanModal">
+    <div class="modal-sheet" style="position:relative">
+      <button class="close-x" onclick="document.getElementById('scanModal').classList.remove('open')">×</button>
+      <h3 style="display:flex;align-items:center;gap:8px"><span class="ai-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>AI</span>予約確認書から読み取り</h3>
+      <p class="hint">PDF・画像を選ぶと、AIが便名・日時・予約番号などを読み取ってフォームに入力します(保存前に内容を確認できます)。</p>
+      <div class="info-card" style="margin-bottom:0">
+        <div class="info-top"><div><div class="info-kind">読み取り結果(確認用)</div><div class="info-title">JL803 羽田 → 桃園</div></div></div>
+        <div class="info-grid">
+          <div><div class="info-field-label">出発</div><div class="info-field-value">11/12 09:20</div></div>
+          <div><div class="info-field-label">到着</div><div class="info-field-value">11/12 11:50</div></div>
+          <div><div class="info-field-label">予約番号</div><div class="info-field-value">JL-2X9K7</div></div>
+          <div><div class="info-field-label">座席</div><div class="info-field-value">32A</div></div>
+        </div>
+      </div>
+      <button class="primary-btn" onclick="document.getElementById('scanModal').classList.remove('open')">この内容で保存</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
+  const checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round"><path d="M4 12l5 5 11-11"/></svg>';
+
   // bottom nav switching
   document.getElementById('bottomNav').addEventListener('click', (e)=>{
     const btn = e.target.closest('button[data-target]');
@@ -727,3 +878,5 @@
     });
   });
 </script>
+</body>
+</html>
