@@ -211,6 +211,29 @@
   .place-card.tag-visited{ border-left:4px solid var(--tag-visited); }
   .place-card.tag-dropped{ border-left:4px solid var(--line); opacity:.65; }
 
+  .interested-row{
+    display:flex; align-items:center; gap:8px; margin-top:9px; font-size:11.5px; color:var(--muted); font-weight:600;
+  }
+  .interested-avatars{ display:flex; }
+  .mini-av{
+    width:19px; height:19px; border-radius:50%; border:2px solid var(--surface); margin-left:-7px;
+    display:flex; align-items:center; justify-content:center; font-size:8.5px; font-weight:800; color:#fff;
+  }
+  .mini-av:first-child{ margin-left:0; }
+  .promote-row{ margin-top:10px; }
+  .promote-btn{
+    display:inline-flex; align-items:center; gap:5px; background:none; border:1.5px dashed var(--line);
+    color:var(--muted); font-size:11.5px; font-weight:700; padding:6px 11px; border-radius:999px;
+    font-family:inherit; cursor:pointer;
+  }
+  .promote-btn:hover{ border-color:var(--primary); color:var(--primary-ink); }
+  .promote-btn svg{ width:11px; height:11px; }
+
+  .collapse-toggle{
+    display:block; width:100%; text-align:center; background:none; border:none; padding:10px 0;
+    color:var(--muted); font-size:12px; font-weight:700; font-family:inherit; cursor:pointer;
+  }
+
   /* ---------- place cards ---------- */
   .place-card{
     background:var(--surface); border:1px solid var(--line); border-radius:16px;
@@ -512,7 +535,7 @@
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg></div>
             <div class="t-time">18:00</div>
-            <div class="t-card"><div class="t-body"><div class="t-title">士林夜市</div><div class="t-sub">みほ提案・グルメ</div></div><span class="chip planned">行く予定</span></div>
+            <div class="t-card"><div class="t-body"><div class="t-title">士林夜市</div><div class="t-sub">みほ提案・グルメ</div></div><span class="chip planned">行く</span></div>
           </div>
         </div>
       </div>
@@ -523,7 +546,7 @@
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg></div>
             <div class="t-time">09:00</div>
-            <div class="t-card"><div class="t-body"><div class="t-title">九份観光</div><div class="t-sub">バス移動 約1.5時間</div></div><span class="chip planned">行く予定</span></div>
+            <div class="t-card"><div class="t-body"><div class="t-title">九份観光</div><div class="t-sub">バス移動 約1.5時間</div></div><span class="chip planned">行く</span></div>
           </div>
           <div class="t-item free">
             <div class="t-dot"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></div>
@@ -533,7 +556,7 @@
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg></div>
             <div class="t-time">19:00</div>
-            <div class="t-card"><div class="t-body"><div class="t-title">台北101 展望台</div><div class="t-sub">夜景・チケット事前購入要</div></div><span class="chip planned">行く予定</span></div>
+            <div class="t-card"><div class="t-body"><div class="t-title">台北101 展望台</div><div class="t-sub">夜景・チケット事前購入要</div></div><span class="chip planned">行く</span></div>
           </div>
         </div>
       </div>
@@ -544,7 +567,7 @@
           <div class="t-item">
             <div class="t-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg></div>
             <div class="t-time">10:00</div>
-            <div class="t-card"><div class="t-body"><div class="t-title">故宮博物院</div><div class="t-sub">たかし・ゆうた参加</div></div><span class="chip visited">訪問済み</span></div>
+            <div class="t-card"><div class="t-body"><div class="t-title">故宮博物院</div><div class="t-sub">たかし・ゆうた参加</div></div><span class="chip visited">済み</span></div>
           </div>
           <div class="t-item free">
             <div class="t-dot"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></div>
@@ -593,11 +616,11 @@
         </div>
       </div>
       <div class="map-legend">
-        <span><i style="background:#0E6E63"></i>行く予定</span>
+        <span><i style="background:#0E6E63"></i>行く</span>
         <span><i style="background:#4C63C7"></i>気になる</span>
         <span><i style="background:#93A3AB"></i>候補</span>
-        <span><i style="background:#96690A"></i>訪問済み</span>
-        <span><i style="background:#fff;border:2px solid #B9C4C0"></i>今回はなし</span>
+        <span><i style="background:#96690A"></i>済み</span>
+        <span><i style="background:#fff;border:2px solid #B9C4C0"></i>見送り</span>
       </div>
 
       <button class="ai-btn" id="nearbyAiBtn" onclick="runAi(this,'nearbyAiResult')">
@@ -627,18 +650,18 @@
       <div class="section-label">行きたい場所</div>
 
       <div class="tag-filter" id="tagFilter">
-        <div class="tag-filter-pill active" data-tag="all">すべて 5</div>
-        <div class="tag-filter-pill" data-tag="curious"><span class="dot curious"></span>気になる 1</div>
-        <div class="tag-filter-pill" data-tag="candidate"><span class="dot candidate"></span>候補 1</div>
-        <div class="tag-filter-pill" data-tag="planned"><span class="dot planned"></span>行く予定 1</div>
-        <div class="tag-filter-pill" data-tag="visited"><span class="dot visited"></span>訪問済み 1</div>
-        <div class="tag-filter-pill" data-tag="dropped"><span class="dot dropped"></span>今回はなし 1</div>
+        <div class="tag-filter-pill active" data-tag="all">すべて <span class="pill-count">5</span></div>
+        <div class="tag-filter-pill" data-tag="curious"><span class="dot curious"></span>気になる <span class="pill-count">1</span></div>
+        <div class="tag-filter-pill" data-tag="candidate"><span class="dot candidate"></span>候補 <span class="pill-count">1</span></div>
+        <div class="tag-filter-pill" data-tag="planned"><span class="dot planned"></span>行く <span class="pill-count">1</span></div>
+        <div class="tag-filter-pill" data-tag="visited"><span class="dot visited"></span>済み <span class="pill-count">1</span></div>
+        <div class="tag-filter-pill" data-tag="dropped"><span class="dot dropped"></span>見送り <span class="pill-count">1</span></div>
       </div>
 
       <div class="place-card tag-planned" data-tag="planned">
         <div class="place-head">
           <div><div class="place-name">台北101 展望台</div><div class="place-cat">絶景・夜景</div></div>
-          <span class="chip planned">行く予定</span>
+          <span class="chip planned">行く</span>
         </div>
         <div class="place-memo">夜景が綺麗らしい。チケットは並ばないよう事前購入がおすすめとの情報あり。</div>
         <button class="ai-inline-btn" id="triviaAiBtn" onclick="runAi(this,'triviaAiResult')">
@@ -671,6 +694,16 @@
           <span class="chip curious">気になる</span>
         </div>
         <div class="place-memo">千と千尋のモデルと噂のお店。九份観光の後に寄れそう(さきメモ)。</div>
+        <div class="interested-row">
+          <span class="interested-avatars"><span class="mini-av" style="background:#F2703E">み</span><span class="mini-av" style="background:#93A3AB">さ</span></span>
+          みほ・さきが気になる中
+        </div>
+        <div class="promote-row">
+          <button class="promote-btn" onclick="promoteTag(this,'candidate','候補')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            候補に格上げ
+          </button>
+        </div>
         <div class="place-foot">
           <span class="no-pin">● 地図未登録・タップで位置指定</span>
           <button class="gmaps-btn" style="background:var(--surface-2);color:var(--muted)">検索</button>
@@ -683,6 +716,12 @@
           <span class="chip candidate">候補</span>
         </div>
         <div class="place-memo">乾物・お茶の問屋街。お土産探しに良さそうだけど時間があれば(たかしメモ)。</div>
+        <div class="promote-row">
+          <button class="promote-btn" onclick="promoteTag(this,'planned','行く')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            行くに格上げ
+          </button>
+        </div>
         <div class="place-foot">
           <a class="link-pill" href="#" onclick="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/></svg>travel.taipei</a>
           <button class="gmaps-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="2.4"/><path d="M12 21s7-6.4 7-11.5A7 7 0 0 0 5 9.5C5 14.6 12 21 12 21z"/></svg>開く</button>
@@ -692,7 +731,7 @@
       <div class="place-card tag-visited" data-tag="visited">
         <div class="place-head">
           <div><div class="place-name">故宮博物院</div><div class="place-cat">観光・美術館</div></div>
-          <span class="chip visited">訪問済み</span>
+          <span class="chip visited">済み</span>
         </div>
         <div class="place-memo">翡翠の白菜、混雑してたけど見れた。</div>
         <div class="place-foot">
@@ -701,12 +740,15 @@
         </div>
       </div>
 
-      <div class="place-card tag-dropped" data-tag="dropped">
-        <div class="place-head">
-          <div><div class="place-name">象山夜景</div><div class="place-cat">絶景</div></div>
-          <span class="chip dropped">今回はなし</span>
+      <button class="collapse-toggle" id="droppedToggle" onclick="toggleDropped()">見送り(1件)を表示</button>
+      <div id="droppedSection">
+        <div class="place-card tag-dropped" data-tag="dropped">
+          <div class="place-head">
+            <div><div class="place-name">象山夜景</div><div class="place-cat">絶景</div></div>
+            <span class="chip dropped">見送り</span>
+          </div>
+          <div class="place-memo">階段がきつそうなので今回は見送り。次回候補。</div>
         </div>
-        <div class="place-memo">階段がきつそうなので今回は見送り。次回候補。</div>
       </div>
     </section>
 
@@ -1006,17 +1048,69 @@
     document.querySelector(`.day-body[data-day-body="${pill.dataset.day}"]`).style.display='block';
   });
 
-  // 場所:タグフィルタ
+  // 場所:タグフィルタ・件数バッジ・見送りの折りたたみ
+  const TAG_LABELS = {curious:'気になる', candidate:'候補', planned:'行く', visited:'済み', dropped:'見送り'};
+  let droppedExpanded = false;
+  let activeTagFilter = 'all';
+
+  function recalcTagCounts(){
+    const counts = {curious:0, candidate:0, planned:0, visited:0, dropped:0};
+    document.querySelectorAll('.place-card[data-tag]').forEach(c=>{ counts[c.dataset.tag] = (counts[c.dataset.tag]||0) + 1; });
+    const total = Object.values(counts).reduce((a,b)=>a+b, 0);
+    document.querySelectorAll('.tag-filter-pill').forEach(p=>{
+      const tag = p.dataset.tag;
+      const countEl = p.querySelector('.pill-count');
+      if(!countEl) return;
+      countEl.textContent = tag === 'all' ? total : (counts[tag] || 0);
+    });
+    const remaining = counts.dropped;
+    const toggle = document.getElementById('droppedToggle');
+    if(remaining === 0){ toggle.hidden = true; }
+    else { toggle.hidden = false; toggle.textContent = droppedExpanded ? '見送りを隠す' : `見送り(${remaining}件)を表示`; }
+  }
+
+  function applyPlaceFilter(){
+    document.querySelectorAll('.place-card[data-tag]').forEach(card=>{
+      const isDropped = card.dataset.tag === 'dropped';
+      let visible = (activeTagFilter === 'all' || card.dataset.tag === activeTagFilter);
+      if(isDropped && activeTagFilter === 'all' && !droppedExpanded) visible = false;
+      card.style.display = visible ? 'block' : 'none';
+    });
+    document.getElementById('droppedToggle').hidden = (activeTagFilter !== 'all');
+  }
+
+  function toggleDropped(){
+    droppedExpanded = !droppedExpanded;
+    applyPlaceFilter();
+    recalcTagCounts();
+  }
+
   document.getElementById('tagFilter').addEventListener('click', (e)=>{
     const pill = e.target.closest('.tag-filter-pill');
     if(!pill) return;
     document.querySelectorAll('.tag-filter-pill').forEach(p=>p.classList.remove('active'));
     pill.classList.add('active');
-    const tag = pill.dataset.tag;
-    document.querySelectorAll('.place-card[data-tag]').forEach(card=>{
-      card.style.display = (tag==='all' || card.dataset.tag===tag) ? 'block' : 'none';
-    });
+    activeTagFilter = pill.dataset.tag;
+    applyPlaceFilter();
   });
+
+  // ワンタップ格上げ:気になる→候補、候補→行く
+  function promoteTag(btn, newTag, newLabel){
+    const card = btn.closest('.place-card');
+    const oldTag = card.dataset.tag;
+    card.classList.remove(`tag-${oldTag}`);
+    card.classList.add(`tag-${newTag}`);
+    card.dataset.tag = newTag;
+    const chip = card.querySelector('.chip');
+    chip.className = `chip ${newTag}`;
+    chip.textContent = newLabel;
+    btn.closest('.promote-row').remove();
+    recalcTagCounts();
+    applyPlaceFilter();
+  }
+
+  recalcTagCounts();
+  applyPlaceFilter();
 
   // 旅程:日別 ⇄ 通し表示(全日程をまとめてスクロール)
   document.getElementById('itinViewSeg').addEventListener('click', (e)=>{
