@@ -269,7 +269,8 @@
     font-size:10.5px; font-weight:700; color:var(--muted); padding:5px 9px; border-radius:999px;
     display:flex; align-items:center; gap:5px;
   }
-  :root[data-theme="dark"] .map-badge, @media (prefers-color-scheme:dark){ .map-badge{ background:rgba(22,37,42,.85); color:var(--muted);} }
+  :root[data-theme="dark"] .map-badge{ background:rgba(22,37,42,.85); color:var(--muted); }
+  @media (prefers-color-scheme:dark){ .map-badge{ background:rgba(22,37,42,.85); color:var(--muted); } }
   .map-legend{ display:flex; flex-wrap:wrap; gap:12px; margin:10px 0 16px; }
   .map-legend span{ display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--muted); font-weight:600; }
   .map-legend i{ width:9px; height:9px; border-radius:50%; display:inline-block; flex:none; }
@@ -359,14 +360,16 @@
     display:inline-flex; align-items:center; gap:6px; background:none; border:none; padding:9px 0 2px;
     color:#7B57D9; font-size:12px; font-weight:800; font-family:inherit; cursor:pointer;
   }
-  :root[data-theme="dark"] .ai-inline-btn, @media (prefers-color-scheme:dark){ .ai-inline-btn{ color:#C6B6FF; } }
+  :root[data-theme="dark"] .ai-inline-btn{ color:#C6B6FF; }
+  @media (prefers-color-scheme:dark){ .ai-inline-btn{ color:#C6B6FF; } }
   .ai-inline-btn svg{ width:13px; height:13px; }
   .ai-inline-btn:disabled{ opacity:.6; cursor:default; }
   .ai-note{
     border:1px solid #E3DBFB; background:#F7F4FE; border-radius:13px; padding:11px 12px; margin-top:10px;
     display:flex; gap:9px; align-items:flex-start;
   }
-  :root[data-theme="dark"] .ai-note, @media (prefers-color-scheme:dark){ .ai-note{ background:#241E38; border-color:#3B3160; } }
+  :root[data-theme="dark"] .ai-note{ background:#241E38; border-color:#3B3160; }
+  @media (prefers-color-scheme:dark){ .ai-note{ background:#241E38; border-color:#3B3160; } }
   .ai-note p{ font-size:12px; line-height:1.6; color:var(--ink); margin:5px 0 0; opacity:.9; }
   .ai-note .ai-note-head{ display:flex; align-items:center; gap:6px; }
   .ai-disclaimer{ font-size:10px; color:var(--faint); margin-top:6px; }
@@ -374,13 +377,15 @@
     display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:10px;
     padding-top:10px; border-top:1px solid #E3DBFB;
   }
-  :root[data-theme="dark"] .ai-footer, @media (prefers-color-scheme:dark){ .ai-footer{ border-color:#3B3160; } }
+  :root[data-theme="dark"] .ai-footer{ border-color:#3B3160; }
+  @media (prefers-color-scheme:dark){ .ai-footer{ border-color:#3B3160; } }
   .ai-meta{ font-size:10px; color:var(--faint); }
   .ai-regen-btn{
     display:inline-flex; align-items:center; gap:5px; background:none; border:none; padding:0;
     color:#7B57D9; font-size:11px; font-weight:800; font-family:inherit; cursor:pointer; flex:none;
   }
-  :root[data-theme="dark"] .ai-regen-btn, @media (prefers-color-scheme:dark){ .ai-regen-btn{ color:#C6B6FF; } }
+  :root[data-theme="dark"] .ai-regen-btn{ color:#C6B6FF; }
+  @media (prefers-color-scheme:dark){ .ai-regen-btn{ color:#C6B6FF; } }
   .ai-regen-btn svg{ width:12px; height:12px; }
   .ai-regen-btn:disabled{ opacity:.5; cursor:default; }
   .nearby-item{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); }
@@ -394,10 +399,12 @@
     border:1.5px dashed #C9BBF5; background:#F7F4FE; color:#6B4FD8; border-radius:12px;
     padding:11px; font-size:12.5px; font-weight:800; font-family:inherit; cursor:pointer; margin-top:12px;
   }
-  :root[data-theme="dark"] .scan-btn, @media (prefers-color-scheme:dark){ .scan-btn{ background:#241E38; border-color:#4A3E77; color:#C6B6FF; } }
+  :root[data-theme="dark"] .scan-btn{ background:#241E38; border-color:#4A3E77; color:#C6B6FF; }
+  @media (prefers-color-scheme:dark){ .scan-btn{ background:#241E38; border-color:#4A3E77; color:#C6B6FF; } }
   .scan-btn svg{ width:15px; height:15px; }
   .autofill-mark{ display:inline-flex; align-items:center; gap:3px; font-size:9px; font-weight:800; color:#6B4FD8; margin-top:3px; }
-  :root[data-theme="dark"] .autofill-mark, @media (prefers-color-scheme:dark){ .autofill-mark{ color:#C6B6FF; } }
+  :root[data-theme="dark"] .autofill-mark{ color:#C6B6FF; }
+  @media (prefers-color-scheme:dark){ .autofill-mark{ color:#C6B6FF; } }
 
   .suggest-row .check-box.done{ background:var(--primary); border-color:var(--primary); }
   .suggest-row .check-box svg{ width:12px; height:12px; stroke:#fff; }

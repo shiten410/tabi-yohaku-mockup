@@ -3,6 +3,24 @@
 他AI(Codex等)でのクロスチェック用に、これまでの検討内容を整理したもの。
 最終更新:Codexによる設計レビュー(`CLAUDE_HANDOFF.md`)を反映済み。
 
+## 実装状況(2026-09-17)
+
+- **本番URL**: https://tabitomo-lime.vercel.app(Vercelプロジェクト名 `tabitomo`。完全一致の`tabitomo.vercel.app`は無関係な第三者が既に使用中のため取得不可)
+- **アプリのコード**: `webapp/`ディレクトリ(Next.js)。GitHubリポジトリ [shiten410/tabitomo-app](https://github.com/shiten410/tabitomo-app)(Private)、Vercelと連携済みでmainへのpushで自動デプロイ
+- **モックアップのコード**: リポジトリ直下の`mockup.html`/`index.html`。GitHubリポジトリ [shiten410/tabi-yohaku-mockup](https://github.com/shiten410/tabi-yohaku-mockup)(Public、GitHub Pagesで公開)
+- **Cloudflare D1**: データベース`tabitomo-db`作成済み、スキーマ・サンプルデータ(台北旅行)投入済み。Vercel側からはHTTP API経由(`CLOUDFLARE_API_TOKEN`等の環境変数)でアクセス
+- **Gemini API**: `gemini-3.5-flash-lite`を使用。豆知識生成機能が実際に動作し、結果はD1に保存されて全員に共有される(再生成ボタンあり)
+
+### 実データ連携済みの機能
+旅程(D1のday_plans/schedule_items)、行きたい場所(タグ・フィルタ・格上げ・豆知識生成)、宿泊・交通、持ち物リスト(チェック状態の保存)、やることリスト(完了状態の保存)、メンバー・PIN表示
+
+### まだデモ(見た目だけ)の機能
+- 参加時の名前+PIN認証(実際のログイン・セッション管理は未実装)
+- 「AIで近くの候補地を提案」(現在地取得・距離計算は未実装)
+- 持ち物・やることリストのAIたたき台生成(重複除外・選択追加UIは未接続)
+- 予約確認書のAI読み取り(画像アップロード・Gemini Vision解析は未実装)
+- 複数旅行対応(今は`trip-taipei-demo`の1旅行のみ表示)
+
 ## 確定事項(2026-09-17時点)
 
 - **主DB:Cloudflare D1**(Supabaseは休眠リスクを理由に不採用)
